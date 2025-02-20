@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dynamic Blog Page using Next.js & Tailwind CSS
 
-## Getting Started
+<!-- Project Overview -->
+This project is a dynamic blog page built with Next.js and Tailwind CSS. It fetches blog data from a mock API or static JSON file and displays it in a responsive layout. Users can view a list of blog posts, search for specific posts, and click on a post to see its full details. Users can also perform CRUD operations on the blog posts, but since there is no backend, the changes will not be stored permanently.
 
-First, run the development server:
+<!-- Features -->
+### Landing Page:
+- Data is not fetched but includes animation effects on text, SVG, and button.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Blogs Page (Blog List Page):
+- Fetch and display a list of blog posts from JSON data.
+- Show title, summary, and date of each post with a "Read More" button or clickable card to navigate to the detail page.
+- Responsive grid layout using Tailwind CSS.
+- Skeleton UI for better user experience while loading.
+- **CRUD Operations:**
+  - **Create:** Users can add new blog posts.
+  - **Read:** Users can view the list of blog posts and individual post details.
+  - **Update:** Users can edit existing blog posts.
+  - **Delete:** Users can remove blog posts.
+  - Note: CRUD operations are performed locally and changes are not stored permanently due to the lack of a backend.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Blog Post Detail Page:
+- Dynamic route for each post (`/blogs/[slug]`).
+- Display full content, title, and creation date.
+- Styled using Tailwind CSS.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Search Functionality:
+- Search bar to filter posts by title.
+- Case-insensitive, real-time filtering with debounce.
+- Display "No posts found" if no matches.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Pagination:
+- Limit the number of posts per page (e.g., 5 posts per page).
 
-## Learn More
+### Error Handling (Bonus Feature):
+- Show an error message if API fetch fails or no posts are available.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<!-- Technologies Used -->
+- Next.js for server-side rendering and routing.
+- Tailwind CSS for styling.
+- React Hooks for state management.

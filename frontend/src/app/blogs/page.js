@@ -6,6 +6,7 @@ import articlesData from "../../data/blog-posts.json";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import SearchBar from "../../components/layout/SearchBar";
+import Button from "../../components/ui/Button";
 
 const Blog = () => {
   const [articles, setArticles] = useState([]);
@@ -96,7 +97,14 @@ const Blog = () => {
           Motorcycle Blogs
         </h1>
 
-        {!loading && <SearchBar onSearch={handleSearch} />}
+        <div className="flex justify-between items-center mb-4">
+          {!loading && (
+            <>
+              <Button label="Add Blog" route="/blogs/add" />
+              <SearchBar onSearch={handleSearch} />
+            </>
+          )}
+        </div>
 
         <div className="grid grid-cols-1 gap-6 mb-8">
           {loading

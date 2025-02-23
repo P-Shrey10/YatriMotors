@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { addToFavorites, removeFromFavorites } from "../../store/favoriteSlice";
 import articlesData from "../../data/blog-posts.json";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
@@ -17,6 +19,8 @@ const Blog = () => {
 
   const articlesPerPage = 5;
   const router = useRouter();
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites.items);
 
   useEffect(() => {
     setIsClient(true);
@@ -68,6 +72,16 @@ const Blog = () => {
   const goToPrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const goToNextPage = () =>
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+
+  const handleFavorite = (e, article) => {
+    e.stopPropagation();
+    const isFavorite = favorites.some((fav) => fav.id === article.id);
+    if (isFavorite) {
+      dispatch(removeFromFavorites(article));
+    } else {
+      dispatch(addToFavorites(article));
+    }
+  };
 
   const SkeletonCard = () => (
     <div className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
@@ -146,6 +160,28 @@ const Blog = () => {
                         <span className="px-4 py-2 bg-[#10424a] text-white rounded-lg text-sm font-semibold">
                           Read More
                         </span>
+                        <button
+                          onClick={(e) => handleFavorite(e, article)}
+                          className="ml-auto p-2 rounded-full hover:bg-gray-100 transition-colors"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={`h-6 w-6 ${
+                              favorites.some((fav) => fav.id === article.id)
+                                ? "fill-red-500 stroke-red-500"
+                                : "fill-none stroke-gray-400"
+                            }`}
+                            viewBox="0 0 24 24"
+                            strokeWidth="2"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                            />
+                          </svg>
+                        </button>
                       </div>
                     </div>
                   </div>
